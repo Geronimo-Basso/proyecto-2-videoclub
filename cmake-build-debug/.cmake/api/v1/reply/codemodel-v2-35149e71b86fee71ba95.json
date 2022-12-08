@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.23"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "proyecto_2_videoClub",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "proyecto_2_videoClub::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-proyecto_2_videoClub-Debug-17312409134f15b5b9c4.json",
+					"name" : "proyecto_2_videoClub",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/GeronimoBasso/Desktop/Tercer_Semestre/PEL/Semana-12/proyecto-2-videoClub/cmake-build-debug",
+		"source" : "/Users/GeronimoBasso/Desktop/Tercer_Semestre/PEL/Semana-12/proyecto-2-videoClub"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}
