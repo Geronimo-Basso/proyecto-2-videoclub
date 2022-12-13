@@ -36,5 +36,27 @@ public:
     string getTitulo() const {
         return titulo;
     }
+
+    string toString() {
+        return "*Titulo Disco: " +
+               titulo +
+               "\n Precio: " +
+               to_string(precio) +
+               "\n En DVD: " +
+               tipoDisco(esDVD)+
+               "\n En BLR: " +
+               tipoDisco(esBLR);
+    }
+
+    string tipoDisco( bool variable ){
+        string devolucion = "";
+        if (variable){
+            devolucion = "Si";
+        }else{
+            devolucion = "No";
+        }
+        return devolucion;
+    }
+
 };
 #endif //PROYECTO_2_VIDEOCLUB_DISCO_H

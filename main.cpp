@@ -33,20 +33,60 @@ int main() {
     inicializarDiscos(*discos);
     bool condicionLoop = true;
     cout << "---- Bienvenido a nuestro VIDEOCLUB, seleccione una de las opciones de nuestro menu------" << endl;
-    char opcionMenu;
+    int opcionMenu;
     while ( condicionLoop ){
-        cout << "1. Mostar listado disco \n2. Buscar discos por titulo \n3. Alquilar disco \n4. Devolver disco \n5. Terminar programa" << endl;
+        cout << "1. Añadir Disco \n2. Mostar listado disco \n3. Buscar discos por titulo \n4. Alquilar disco \n5. Devolver disco \n6. Terminar programa" << endl;
         cin >> opcionMenu;
-        switch (opcionMenu) {
+        switch ( opcionMenu ) {
             case 1:
+            {
+                string titulo,precio,esDVD,esBLR;
+                float precioF;
+                bool esDVDb,esBLRb;
+                cout << "Ingrese el titulo: " << endl;
+                cin >> titulo;
+                cout << "Ingrese el precio: " << endl;
+                cin >> precio;
+                try{
+                    precioF = stof( precio );
+                }catch(...){
+                    cout << "Error, no se ingreso un float" << endl;
+                    break;
+                }
+                cout << "El disco esta en formato DVD? (s/n) : " << endl;
+                cin >> esDVD;
+                if(esDVD == "n"){
+                    esDVDb = false;
+                }
+                cout << "El disco esta en formato BLR? (s/n) : " << endl;
+                cin >> esBLR;
+                if(esBLR == "n"){
+                    esBLRb = false;
+                }
+                Disco *discoToAdd = new Disco( titulo , precioF , esDVDb , esBLRb );
+                discos->push_back(*discoToAdd);
                 break;
+            }
             case 2:
+            {
+                for (int i = 0; i < discos->size(); ++i) {
+                    cout << discos->now( i )-> toString() << endl;
+                }
                 break;
+            }
             case 3:
+            {
                 break;
+            }
             case 4:
+            {
                 break;
+            }
             case 5:
+            {
+                break;
+            }
+            case 6:
                 condicionLoop = false;
             default:
                 cout << "-----Porfavor ingrese una opcion valida----" << endl;
