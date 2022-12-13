@@ -8,7 +8,7 @@ private:
     string titulo;
     float precio;
     bool esDVD;
-    bool esBLR;
+    bool estaAlquilado;
 public:
     /**
      * Constructor sin parametros del objeto Disco
@@ -22,11 +22,11 @@ public:
      * @param esDVD si el disco es DVD
      * @param esBLR si el disco es Blue-ray
      */
-    Disco(string titulo,  float precio, bool esDVD, bool esBLR){
+    Disco(string titulo,  float precio, bool esDVD){
         Disco::titulo = titulo;
         Disco::precio = precio;
-        Disco::esBLR = esBLR;
         Disco::esDVD = esDVD;
+        Disco::estaAlquilado = false;
     }
 
     /**
@@ -37,20 +37,26 @@ public:
         return titulo;
     }
 
+    bool isEstaAlquilado() const {
+        return estaAlquilado;
+    }
+
+    void setEstaAlquilado( bool estaAlquilado ) {
+        Disco::estaAlquilado = estaAlquilado;
+    }
+
     string toString() {
         return "*Titulo Disco: " +
                titulo +
                "\n Precio: " +
-               to_string(precio) +
+               to_string( precio ) +
                "\n En DVD: " +
-               tipoDisco(esDVD)+
-               "\n En BLR: " +
-               tipoDisco(esBLR);
+               tipoDisco( esDVD );
     }
 
     string tipoDisco( bool variable ){
-        string devolucion = "";
-        if (variable){
+        string devolucion;
+        if ( variable ){
             devolucion = "Si";
         }else{
             devolucion = "No";
