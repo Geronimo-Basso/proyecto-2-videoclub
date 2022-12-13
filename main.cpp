@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "VectorPEL.h"
 #include "Disco.h"
 using namespace std;
@@ -76,6 +77,14 @@ int main() {
             }
             case 3:
             {
+                string tituloABuscar;
+                cout << "Ingrese el titulo: " << endl;
+                getline(cin,tituloABuscar);
+                for (int i = 0; i < discos->size(); ++i) {
+                    if( discos->now(i)->getTitulo() == tituloABuscar){
+                        cout << discos->now( i )-> toString() << endl;
+                    }
+                }
                 break;
             }
             case 4:
