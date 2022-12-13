@@ -37,23 +37,44 @@ public:
         return titulo;
     }
 
+    /**
+     * Getter para saber si un Disco esta alquilado o no
+     * @return
+     */
     bool isEstaAlquilado() const {
         return estaAlquilado;
     }
 
+    /**
+     * Setter para poder configurar el estado de alquiler de un Disco
+     * @param estaAlquilado
+     */
     void setEstaAlquilado( bool estaAlquilado ) {
         Disco::estaAlquilado = estaAlquilado;
     }
 
+    /**
+     * Metodo toString para poder devolver toda la información dentro de la clase Disco.
+     * @return devuelvo el string en un formato lindo de leer que voy a imprimir más adelante.
+     */
     string toString() {
-        return "*Titulo Disco: " +
+        return "*Titulo: " +
                titulo +
                "\n Precio: " +
                to_string( precio ) +
                "\n En DVD: " +
-               tipoDisco( esDVD );
+               tipoDisco( esDVD ) +
+                "\n En BLR: " +
+                tipoDisco( !esDVD ) +
+                "\n ¿Esta alquilado? " +
+                tipoDisco(estaAlquilado);
     }
 
+    /**
+     * Metodo tipoDisco, el cual devuelve si un disco es DVD O BLR.
+     * @param variable bool que le paso para cheequear.
+     * @return string que uso luego en el toString.
+     */
     string tipoDisco( bool variable ){
         string devolucion;
         if ( variable ){
@@ -63,6 +84,5 @@ public:
         }
         return devolucion;
     }
-
 };
 #endif //PROYECTO_2_VIDEOCLUB_DISCO_H

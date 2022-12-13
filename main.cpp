@@ -4,6 +4,10 @@
 #include "Disco.h"
 using namespace std;
 
+/**
+ * Funcion de tipo void que inicializa con ciertos discos el programa, para que ya haya discos cargados al inicio.
+ * @param discos el vectorPEL donde voy a guardar los discos
+ */
 void inicializarDiscos(VectorPEL<Disco> &discos){
     Disco *disco = new Disco( "Star wars: the phantom menance" , 9.99f , true);
     Disco *disco1 = new Disco( "Star wars: attack of the clones" , 12.99f , false );
@@ -29,29 +33,38 @@ void inicializarDiscos(VectorPEL<Disco> &discos){
     discos.push_back(*disco10);
 }
 
+/**
+ * Funcion que me permite limpiar el cin, para evitar problemas.
+ */
 void cinearlo(){
     cin.ignore();
     cin.clear();
     cin.sync();
 }
 
+/**
+ * Funcione mail del programa, donde se ejecuta el codigo dentro de main.cpp
+ * @return
+ */
 int main() {
     VectorPEL<Disco> *discos = new VectorPEL<Disco>;
     inicializarDiscos(*discos);
     bool condicionLoop = true;
     cout << "---- Bienvenido a nuestro VIDEOCLUB, seleccione una de las opciones de nuestro menu------" << endl;
     int opcionMenu;
+    //Entro al menu principal de la aplicacion donde voy a dar varias opciones para que los usuarios eligan.
     while ( condicionLoop ){
         cout << "Opciones Menu: \n1. Añadir Disco \n2. Mostar listado de todos los discos \n3. Buscar discos por titulo \n4. Mostrar libros disponibles para alquiler \n5. Alquilar disco \n6. Devolver disco \n7. Terminar programa" << endl;
         cin >> opcionMenu;
         switch ( opcionMenu ) {
-            case 1:
+            case 1: //caso numero 1, en donde se añade el disco
             {
                 string titulo,precio,esDVD;
                 float precioF;
                 bool esDVDb;
                 cout << "Ingrese el titulo: " << endl;
-                cin >> titulo;
+                cinearlo();
+                getline(cin,titulo);
                 cout << "Ingrese el precio: " << endl;
                 cin >> precio;
                 try{
@@ -62,36 +75,42 @@ int main() {
                 }
                 cout << "El disco esta en formato DVD? (s/n) : " << endl;
                 cin >> esDVD;
-                if(esDVD == "n"){
+                if(esDVD == "s"){
+                    esDVDb = true;
+                }else if(esDVD == "n"){
                     esDVDb = false;
                 }
                 Disco *discoToAdd = new Disco( titulo , precioF , esDVDb );
                 discos->push_back(*discoToAdd);
                 break;
             }
-            case 2:
+            case 2: //mostrar listado de todos los discos
             {
                 for (int i = 0; i < discos->size(); ++i) {
                     cout << discos->now( i )-> toString() << endl;
                 }
                 break;
             }
-            case 3:
+            case 3: //buscar discos por titulo
             {
                 string tituloABuscar;
+                bool encontreDisco = false;
                 cout << "Ingrese el titulo: " << endl;
                 cinearlo();
                 getline(cin,tituloABuscar);
                 for (int i = 0; i < discos->size(); ++i) {
                     if( discos->now(i)->getTitulo() == tituloABuscar){
+                        encontreDisco = true;
                         cout << discos->now( i )-> toString() << endl;
-                    }else{
-                        cout << "No se encontro disco con ese nombre." << endl;
                     }
+                }
+
+                if( encontreDisco == false){
+                    cout << "Este libro no existe, pruebe con otro porfavor." << endl;
                 }
                 break;
             }
-            case 4:
+            case 4: //mostrar disco disponibles para alquiler
             {
                 cout << "Listado de discos disponibles para alquiler: " << endl;
                 for (int i = 0; i < discos->size(); ++i) {
@@ -101,8 +120,9 @@ int main() {
                 }
                 break;
             }
-            case 5:
+            case 5: //alquilar un disco
             {
+                bool encontreDisco = false;
                 cout << "Introduzca el nombre del disco que quiere alquilar: " << endl;
                 string tituloABuscar;
                 cinearlo();
@@ -110,15 +130,18 @@ int main() {
                 for (int i = 0; i < discos->size(); ++i) {
                     if( discos->now(i)->getTitulo() == tituloABuscar && !(discos->now(i)->isEstaAlquilado())){
                         discos->now(i)->setEstaAlquilado(true);
-                        cout << discos->now( i )-> toString() << endl;
-                    }else{
-                        cout << "No tenemos disponible ese disco en este momento, pruebe con otro." << endl;
+                        encontreDisco = true;
+                        cout << "Se ha alquilado con exito el libro" << endl;
                     }
+                }
+                if( encontreDisco == false){
+                    cout << "Este libro no existe, o ya esta alquilado.Pruebo con otro porfavor." << endl;
                 }
                 break;
             }
-            case 6:
+            case 6: //devolver un libro
             {
+                bool encontreDisco = false;
                 cout << "Introduzca el nombre del disco que quiere devolver: " << endl;
                 string tituloABuscar;
                 cinearlo();
@@ -126,17 +149,18 @@ int main() {
                 for (int i = 0; i < discos->size(); ++i) {
                     if( discos->now(i)->getTitulo() == tituloABuscar && discos->now(i)->isEstaAlquilado()){
                         discos->now(i)->setEstaAlquilado(false);
-                        cout << discos->now( i )-> toString() << endl;
+                        encontreDisco = true;
                         cout << "Se ha devuelto el libro con exito" << endl;
-                    }else{
-                        cout << "No encontramos el disco." << endl;
                     }
+                }
+                if( encontreDisco == false){
+                    cout << "Este libro no existe, pruebe con otro porfavor." << endl;
                 }
                 break;
             }
-            case 7:
+            case 7: //terminar programa
                 condicionLoop = false;
-            default:
+            default: //caso default por si me pasan algun dato que no es.
                 cout << "-----Porfavor ingrese una opcion valida----" << endl;
                 break;
         }
